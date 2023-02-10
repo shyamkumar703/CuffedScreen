@@ -8,21 +8,26 @@
 import SwiftUI
 
 struct ProfileHeader: View {
-    @State private var imageData: Data?
+    @Binding var imageData: Data?
+    @Binding var name: String
+    @Binding var age: Double
+    @Binding var bio: String
+    
+    var editButtonAction: () -> Void
     var body: some View {
         VStack(spacing: 12) {
             ImageWithPicker(clippedSize: 120, selectedImageData: $imageData)
             HStack(alignment: .bottom) {
-                Text("John Appleseed")
+                Text(name)
                     .font(.headline)
-                Text("28")
+                Text("\(Int(age))")
                     .font(.subheadline.bold())
                     .foregroundColor(.secondary)
             }
-            Text("Live, laugh, love")
+            Text(bio)
                 .font(.footnote)
             Button {
-                print("hello")
+                editButtonAction()
             } label: {
                 Text("Edit profile")
                     .font(.footnote)
@@ -41,7 +46,7 @@ struct ProfileHeader: View {
 struct ProfileHeader_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            ProfileHeader()
+            ProfileHeader(imageData: .constant(nil), name: .constant("John Appleseed"), age: .constant(28), bio: .constant("Live, laugh, love.")) {}
             Spacer()
         }
     }

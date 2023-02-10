@@ -52,19 +52,14 @@ struct CharacterTextView: View {
         .padding()
         .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
+                Button {
                     // pop
                     dismiss()
-                }
-                .tint(.primary)
-            }
-            
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Save") {
-                    // save and pop
-                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.left")
                 }
                 .tint(.primary)
             }

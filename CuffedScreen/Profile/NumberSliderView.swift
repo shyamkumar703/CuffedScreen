@@ -10,6 +10,8 @@ import SwiftUI
 struct NumberSliderView: View {
     var navigationTitle: String
     @Binding var age: Double
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         VStack {
             Text("\(Int(age))")
@@ -20,7 +22,19 @@ struct NumberSliderView: View {
         }
         .padding()
         .navigationTitle(navigationTitle)
+        .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    // pop
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.left")
+                }
+                .tint(.primary)
+            }
+        }
     }
 }
 

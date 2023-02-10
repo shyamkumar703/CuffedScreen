@@ -10,21 +10,27 @@ import SwiftUI
 struct ContentView: View {
     @State var imageData: Data?
     @State private var isShowingEditProfile = false
+    @State private var name: String = "John Appleseed"
+    @State private var age: Double = 28
+    @State private var bio: String = "Live, laugh, love"
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            ProfileHeader()
+            ProfileHeader(imageData: $imageData, name: $name, age: $age, bio: $bio) {
+                isShowingEditProfile.toggle()
+            }
             HStack {
                 Text("MILESTONES")
                     .font(.subheadline.monospaced())
                 Spacer()
-                Image(systemName: "plus")
-                    .font(.subheadline.monospaced())
-                    .fontWeight(.medium)
-                    .tint(.primary)
-                    .onTapGesture {
-                        print("hello")
-                    }
+                Button {
+                    // add milestone
+                } label: {
+                    Image(systemName: "plus")
+                        .font(.subheadline.monospaced())
+                        .fontWeight(.medium)
+                        .tint(.primary)
+                }
             }
             .padding(.horizontal)
 
@@ -34,7 +40,9 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $isShowingEditProfile) {
-            EditProfileView(imageData: $imageData, name: .constant("John Appleseed"), bio: .constant("Live, laugh, love."), age: .constant(22))
+            NavigationView {
+                EditProfileView(imageData: $imageData, name: $name, bio: $bio, age: $age)
+            }
         }
     }
 }
