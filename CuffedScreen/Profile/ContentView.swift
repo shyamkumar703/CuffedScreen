@@ -13,26 +13,24 @@ struct ContentView: View {
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack {
-                ProfileHeader()
-                HStack {
-                    Text("MILESTONES")
-                        .font(.subheadline.monospaced())
-                    Spacer()
-                    Image(systemName: "plus")
-                        .font(.subheadline.monospaced())
-                        .fontWeight(.medium)
-                        .tint(.primary)
-                        .onTapGesture {
-                            print("hello")
-                        }
-                }
-                .padding(.horizontal)
+            ProfileHeader()
+            HStack {
+                Text("MILESTONES")
+                    .font(.subheadline.monospaced())
+                Spacer()
+                Image(systemName: "plus")
+                    .font(.subheadline.monospaced())
+                    .fontWeight(.medium)
+                    .tint(.primary)
+                    .onTapGesture {
+                        print("hello")
+                    }
+            }
+            .padding(.horizontal)
 
-                VStack(spacing: 40) {
-                    ImageWithCaption()
-                    ImageWithCaption()
-                }
+            VStack(spacing: 40) {
+                ImageWithCaption()
+                ImageWithCaption()
             }
         }
         .sheet(isPresented: $isShowingEditProfile) {

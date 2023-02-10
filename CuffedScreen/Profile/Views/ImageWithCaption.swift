@@ -15,7 +15,8 @@ struct ImageWithCaption: View {
                 .resizable()
                 .scaledToFill()
                 .frame(width: clippedSize, height: clippedSize)
-                .clipShape(Rectangle())
+                .clipped()
+                .contentShape(Rectangle())
             
             VStack(alignment: .leading, spacing: 8) {
                 Text("Graduated Stanford 2014".uppercased())
