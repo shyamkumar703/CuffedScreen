@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct CuffedScreenApp: App {
+    @State var text: String = ""
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
