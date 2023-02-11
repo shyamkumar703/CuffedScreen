@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Milestone: Codable {
+struct Milestone: Codable {
     var image: Data
     var title: String
     var description: String

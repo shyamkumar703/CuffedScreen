@@ -24,6 +24,7 @@
 		01790BC42996E89700E4F1BC /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01790BC32996E89700E4F1BC /* EditProfileView.swift */; };
 		01790BC62996EB4B00E4F1BC /* EditProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01790BC52996EB4B00E4F1BC /* EditProfileCell.swift */; };
 		01790BC82996EE4C00E4F1BC /* NumberSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01790BC72996EE4C00E4F1BC /* NumberSliderView.swift */; };
+		01EEAF18299710420095F94E /* NewMilestoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EEAF17299710420095F94E /* NewMilestoneView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		01790BC32996E89700E4F1BC /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		01790BC52996EB4B00E4F1BC /* EditProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileCell.swift; sourceTree = "<group>"; };
 		01790BC72996EE4C00E4F1BC /* NumberSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSliderView.swift; sourceTree = "<group>"; };
+		01EEAF17299710420095F94E /* NewMilestoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMilestoneView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 			children = (
 				01790BB62995B87500E4F1BC /* Views */,
 				01790B882995B63E00E4F1BC /* ContentView.swift */,
+				01EEAF17299710420095F94E /* NewMilestoneView.swift */,
 				01790BBF2995DAEF00E4F1BC /* CharacterTextView.swift */,
 				01790BC72996EE4C00E4F1BC /* NumberSliderView.swift */,
 				01790BC32996E89700E4F1BC /* EditProfileView.swift */,
@@ -314,6 +317,7 @@
 				01790BC82996EE4C00E4F1BC /* NumberSliderView.swift in Sources */,
 				01790BC42996E89700E4F1BC /* EditProfileView.swift in Sources */,
 				01790B892995B63E00E4F1BC /* ContentView.swift in Sources */,
+				01EEAF18299710420095F94E /* NewMilestoneView.swift in Sources */,
 				01790BB22995B77B00E4F1BC /* Profile.swift in Sources */,
 				01790BC02995DAEF00E4F1BC /* CharacterTextView.swift in Sources */,
 				01790BBC2995C51600E4F1BC /* NumberCaptionStack.swift in Sources */,

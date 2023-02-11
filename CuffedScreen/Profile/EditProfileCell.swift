@@ -10,11 +10,12 @@ import SwiftUI
 struct EditProfileCell: View {
     var title: String
     var value: String
+    var validation: (String) -> Bool = { _ in true }
     
     var body: some View {
         HStack {
             Text(title)
-                .foregroundColor(.primary)
+                .foregroundColor(validation(value) ? .primary : .red)
             Spacer(minLength: 16)
             Text(value)
                 .foregroundColor(.secondary)
