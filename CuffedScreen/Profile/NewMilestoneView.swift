@@ -5,6 +5,7 @@
 //  Created by Shyam Kumar on 2/10/23.
 //
 
+import PhotosUI
 import SwiftUI
 
 struct NewMilestoneView: View {
@@ -19,38 +20,51 @@ struct NewMilestoneView: View {
     @State var milestoneCaption: String = ""
     @Binding var milestones: [Milestone]
     
-    var imageData: Data?
+    @State private var selectedItem: PhotosPickerItem?
+    @State var selectedImageData: Data?
     
     @Environment(\.dismiss) var dismiss
     
     var shouldShowPostButton: Bool {
-        !milestoneTitle.isEmpty && !milestoneCaption.isEmpty
+        !milestoneTitle.isEmpty && !milestoneCaption.isEmpty && selectedImageData != nil
     }
     
     var body: some View {
         VStack {
-            if let imageData,
-               let uiImage = UIImage(data: imageData) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: clippedSize, height: clippedSize)
-                    .clipped()
-                    .contentShape(Rectangle())
-                Spacer()
-                List {
-                    ForEach(MilestoneField.allCases, id: \.self) { field in
-                        NavigationLink {
-                            AnyView(viewFor(field))
-                        } label: {
-                            cellFor(field)
-                        }
+            PhotosPicker(
+                selection: $selectedItem,
+                matching: .images,
+                photoLibrary: .shared()
+            ) {
+                if let imageData = selectedImageData,
+                   let uiImage = UIImage(data: imageData) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: clippedSize, height: clippedSize)
+                        .clipped()
+                        .contentShape(Rectangle())
+                } else {
+                    Image(systemName: "camera.fill")
+                        .tint(.primary)
+                        .frame(width: 120, height: 120)
+                        .background { Color.secondary.opacity(0.4) }
+                        .clipShape(Circle())
+                }
+            }
+            
+            Spacer()
+            
+            List {
+                ForEach(MilestoneField.allCases, id: \.self) { field in
+                    NavigationLink {
+                        AnyView(viewFor(field))
+                    } label: {
+                        cellFor(field)
                     }
                 }
-                .listStyle(.plain)
-            } else {
-                // error handle
             }
+            .listStyle(.plain)
         }
         .navigationTitle("New milestone")
         .navigationBarTitleDisplayMode(.inline)
@@ -59,12 +73,21 @@ struct NewMilestoneView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Post") {
                         // post and dismiss
-                        if let data = imageData {
+                        if let data = selectedImageData {
                             milestones.append(Milestone(image: data, title: milestoneTitle, description: milestoneCaption))
                         }
                         dismiss()
                     }
                     .tint(.primary)
+                }
+            }
+        }
+        .onChange(of: selectedItem) { newItem in
+            Task {
+                if let data = try? await newItem?.loadTransferable(type: Data.self) {
+                    withAnimation {
+                        selectedImageData = data
+                    }
                 }
             }
         }
@@ -102,7 +125,7 @@ struct NewMilestoneView: View {
 struct NewMilestoneView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            NewMilestoneView(milestones: .constant([]), imageData: UIImage(named: "stock")?.pngData())
+            NewMilestoneView(milestones: .constant([]), selectedImageData: nil)
         }
     }
 }

@@ -9,21 +9,24 @@ import SwiftUI
 
 struct ImageWithCaption: View {
     var clippedSize: CGFloat = UIScreen.main.bounds.width
+    var milestone: Milestone
     var body: some View {
         VStack {
-            Image("stock")
-                .resizable()
-                .scaledToFill()
-                .frame(width: clippedSize, height: clippedSize)
-                .clipped()
-                .contentShape(Rectangle())
+            if let image = UIImage(data: milestone.image) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: clippedSize, height: clippedSize)
+                    .clipped()
+                    .contentShape(Rectangle())
+            }
             
             VStack(alignment: .leading, spacing: 8) {
-                Text("Graduated Stanford 2014".uppercased())
+                Text(milestone.title.uppercased())
                     .font(.headline.monospaced())
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(.primary)
-                Text("Spent 4 years getting a CS degree. Met my best friends here.")
+                Text(milestone.description)
                     .font(.caption)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .lineLimit(3)
@@ -36,6 +39,6 @@ struct ImageWithCaption: View {
 
 struct ImageWithCaption_Previews: PreviewProvider {
     static var previews: some View {
-        ImageWithCaption()
+        ImageWithCaption(milestone: Milestone(image: Data(), title: "Graduated Stanford 2014", description: "Spent 4 years getting a CS degree. Met my best friends here."))
     }
 }

@@ -10,9 +10,11 @@ import SwiftUI
 struct ContentView: View {
     @State var imageData: Data?
     @State private var isShowingEditProfile = false
+    @State private var isShowingNewMilestone = false
     @State private var name: String = "John Appleseed"
     @State private var age: Double = 28
     @State private var bio: String = "Live, laugh, love"
+    @State private var milestones: [Milestone] = []
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -25,6 +27,7 @@ struct ContentView: View {
                 Spacer()
                 Button {
                     // add milestone
+                    isShowingNewMilestone.toggle()
                 } label: {
                     Image(systemName: "plus")
                         .font(.subheadline.monospaced())
@@ -35,13 +38,19 @@ struct ContentView: View {
             .padding(.horizontal)
 
             VStack(spacing: 40) {
-                ImageWithCaption()
-                ImageWithCaption()
+                ForEach(milestones) { milestone in
+                    ImageWithCaption(milestone: milestone)
+                }
             }
         }
         .sheet(isPresented: $isShowingEditProfile) {
             NavigationView {
                 EditProfileView(imageData: $imageData, name: $name, bio: $bio, age: $age)
+            }
+        }
+        .sheet(isPresented: $isShowingNewMilestone) {
+            NavigationView {
+                NewMilestoneView(milestones: $milestones)
             }
         }
     }
